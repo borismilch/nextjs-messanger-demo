@@ -41,7 +41,7 @@ const ImageInput: React.FC<{lastMessage: any}> = ({lastMessage}) => {
 
       {
         MediaStore.files.map((file, idx) => (
-          <SendImage idx={idx} file={file} />
+          <SendImage key={file.size + idx} idx={idx} file={file} />
         ))
       }
 

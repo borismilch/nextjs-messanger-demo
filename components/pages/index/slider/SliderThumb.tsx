@@ -22,6 +22,7 @@ const SliderThumb = () => {
             'small_image relative brightness-[0.65] hover:brightness-90 cursor-pointer transition-all duration-200 ' + 
             (SliderStore.currentSlideImage === idx && 'brightness-[1.10]')
           }
+            key={slide.id}
             onClick={(e) => {e.stopPropagation(); selectImage(idx)}}
           >
 

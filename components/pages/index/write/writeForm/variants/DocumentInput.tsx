@@ -47,7 +47,7 @@ const DocumentInput: React.FC<{lastMessage: any}> = ({lastMessage}) => {
 
       {
         DocumentStore.files.slice().map((file, idx) => (
-          <SendDocument idx={idx} file={file} />
+          <SendDocument key={file.size.toString()} idx={idx} file={file} />
         ))
       }
 

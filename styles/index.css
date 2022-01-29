@@ -1,0 +1,243 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer components {
+
+  .tooltip {
+    @apply bg-gray-900 text-white rounded-lg p-2 text-xs drop-shadow-md transition-all duration-200 opacity-0 invisible group-hover:opacity-90 group-hover:visible absolute font-semibold px-3 whitespace-nowrap
+  }
+
+  .sendFormInput {
+    @apply flex gap-3 p-2 items-center bg-gray-100 focus-within:drop-shadow-md rounded-full focus-within:bg-gray-200 transition-all duration-200 cursor-pointer
+  }
+
+  .tooltip-top {
+    @apply tooltip -top-10 -left-2
+  }
+
+  .tooltip-bottom {
+    @apply tooltip -bottom-10 -left-3
+  }
+
+  .chatItem {
+    @apply flex items-center gap-2 rounded p-2 hover:bg-gray-100 transition-all duration-200 cursor-pointer w-full active:bg-gray-200
+  }
+
+  .shadowIcon {
+    @apply basic_icon bg-white border-gray-300 border shadow-lg
+  }
+
+  .empty_input {
+    @apply text-gray-800 placeholder-gray-500 focus:border-0 border-0 focus:ring-0 bg-transparent
+  }
+
+  .basic_icon {
+    @apply p-[6px] bg-gray-100 transition-all duration-200 hover:bg-gray-200 rounded-full  cursor-pointer active:scale-90 active:bg-gray-200
+  }
+  .avatar {
+    @apply object-cover relative rounded-full overflow-hidden flex-shrink-0 transition-all duration-200 brightness-[0.8] hover:brightness-100 cursor-pointer
+  }
+  .avatar_sm {
+    @apply w-[32px] h-[32px] avatar
+  }
+
+  .gray_button {
+    @apply flex items-center justify-center p-2 rounded-md hover:bg-gray-100 cursor-pointer active:scale-90  transition-all duration-300 mx-auto gap-3 w-full
+  }
+
+  .avatar_md {
+    @apply avatar w-[48px] h-[48px] 
+  }
+
+  .avatar_sd {
+    @apply avatar w-[44px] h-[44px] 
+  }
+
+  .avatar_lg {
+    @apply avatar w-[84px] h-[84px] 
+  }
+
+  body {
+    @apply overflow-x-hidden font-sans
+  }
+
+  .blue_button  {
+    @apply text-white bg-blue-600 hover:bg-indigo-600 transition-all duration-200 cursor-pointer rounded-full p-2 px-5 text-center active:scale-90
+  }
+
+  .link {
+    @apply text-sm text-blue-500 hover:text-indigo-600 transition-all duration-200 underline
+  }
+
+  .users_message {
+    @apply text_message text-white font-medium  bg-gradient-to-t from-sky-400 to-blue-500
+  }
+
+  .text_message {
+    @apply p-2  text-sm break-words max-w-[496px] min-w-[60px] relative
+  }
+
+  .friend_message {
+    @apply text_message bg-gray-200 text-black 
+  }
+
+  .drop_item {
+    @apply p-2 bg-white text-xs font-medium w-full transition-all hover:bg-gray-200  cursor-pointer duration-200 whitespace-nowrap
+  }
+
+  .emoji {
+    @apply text-2xl flex items-center justify-center  p-2 rounded-lg transition-all cursor-pointer active:scale-90 duration-200 hover:bg-gray-200
+  }
+
+  .overlay_ddd {
+    @apply inset-0  hover:opacity-100 hover:visible transition-all duration-200 bg-black bg-opacity-50 flex items-center
+  }
+
+  .round_button {
+    @apply bg-white rounded-full drop-shadow-md transition-all duration-200 hover:bg-gray-100 cursor-pointer active:scale-90 p-2 flex items-center disabled:opacity-50 disabled:cursor-not-allowed
+  }
+
+  .message_toolbar {
+    @apply absolute opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 -top-3 right-3
+  }
+
+  .message_img {
+    @apply flex w-[47%] flex-grow h-[50%] relative transition-all duration-200 brightness-75 hover:brightness-90 rounded-md drop-shadow overflow-hidden
+  }
+
+  .sidebar {
+    @apply flex flex-col bg-[#3F0E40] flex-[0.3] fixed md:relative h-full transition-all duration-300 z-50 transform translate-x-[-260px] max-w-[260px] md:translate-x-[0px]
+  }
+
+  .mobile_overlay {
+    @apply  inset-0 bg-black bg-opacity-60 w-screen h-screen absolute transition-all duration-300 z-30 flex md:hidden
+  }
+
+
+  .small_overlay {
+    @apply inset-0 z-10 transition-all duration-200 bg-black absolute hover:opacity-100 opacity-0 bg-opacity-40 flex items-center h-full justify-center 
+  }
+
+  .add_button {
+    @apply bg-gray-200 active:scale-90 cursor-pointer hover:bg-gray-300 transition-all duration-200 rounded-xl p-3 h-full text-2xl
+  }
+  
+  .sleleton {
+    @apply flex animate-pulse flex-row items-center w-full h-full justify-center bg-gray-100 rounded-xl flex-grow
+  }
+
+  .small_image {
+    @apply w-[50px] h-[50px]  relative rounded-lg drop-shadow overflow-hidden 
+  }
+
+  .thumb_image {
+    @apply small_image w-[60px] h-[60px]
+  }
+
+  audio::-webkit-media-controls-panel {
+    @apply from-sky-400 to-blue-500
+  }
+}
+
+.timeline {
+  -webkit-appearance: none;
+  height: 2em;
+  border-radius: 5px;
+
+}
+
+.timeline::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  cursor: pointer;
+  opacity: 0;
+  transition: all .1s;
+}
+
+
+.timeline::-ms-thumb {
+  -webkit-appearance: none;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  cursor: pointer;
+  opacity: 0;
+  transition: all .1s;
+}
+
+.timeline::-webkit-slider-thumb:hover {
+  background-color: rgb(37, 99, 235);
+}
+
+.timeline:hover::-webkit-slider-thumb {
+  opacity: 1;
+}
+
+.timeline::-moz-range-thumb:hover {
+  background-color: rgb(37, 99, 235);
+}
+
+.timeline:hover::-moz-range-thumb {
+  opacity: 1;
+}
+
+.timeline::-ms-thumb:hover {
+  background-color: rgb(37, 99, 235);
+}
+
+.timeline:hover::-ms-thumb {
+  opacity: 1;
+}
+
+.timeline::-webkit-slider-runnable-track {
+  -webkit-appearance: none;
+  box-shadow: none;
+  border: none;
+  background: transparent;
+}
+
+.timeline::-moz-range-track {
+  -webkit-appearance: none;
+  box-shadow: none;
+  border: none;
+  background: transparent;
+}
+
+.timeline::-ms-track {
+  -webkit-appearance: none;
+  box-shadow: none;
+  border: none;
+  background: transparent;
+}
+
+.sound-button {
+  background-color: transparent;
+  border: 0;
+  width: var(--sound-button-width);
+  height: var(--sound-button-width);
+  cursor: pointer;
+  padding: 0;
+}
+
+
+audio::-webkit-media-controls-panel {
+  background-color: rgb(59, 130, 246) !important;
+  
+}
+
+audio {
+  outline: none;
+
+}
+
+.message audio::-webkit-media-controls-panel {
+  background-color: rgb(59, 130, 246) !important;
+  background-image: linear-gradient(to top, var(--tw-gradient-stops));
+  --tw-gradient-from: #38bdf8;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(56 189 248 / 0));
+  --tw-gradient-to: #3b82f6;
+}

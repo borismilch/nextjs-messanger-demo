@@ -1,0 +1,47 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+
+    "baseUrl": ".",
+    "paths": {
+      "@/components/*": ["components/*"],
+      "@/gql/*": ["graphql/*"],
+      "@/hooks/*": ["hooks/*"],
+      "@/models/*": ["models/*"],
+      "@/lib/*": ["lib/*"],
+      "@/prisma/*": ["prisma/*"],
+      "@/store/*": ["store/*"],
+      "@/utils/*": ["utils/*"],
+      "@/pages/*": ["pages/*"],
+      "@/auth/*": ["auth/*"],
+      "@/icons/*": ["components/icons/"],
+      "@/service/*": ["services/*"]
+    },
+  },
+
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+, "utils/helpers/tohhttmmss.js"  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

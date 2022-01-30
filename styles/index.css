@@ -47,6 +47,14 @@
     @apply flex items-center justify-center p-2 rounded-md hover:bg-gray-100 cursor-pointer active:scale-90  transition-all duration-300 mx-auto gap-3 w-full
   }
 
+  .video_me {
+    @apply rounded-[20px] z-20 fixed overflow-hidden drop-shadow-md w-[250px] h-[180px]  bottom-2 right-2
+  }
+
+  .avatar_xl {
+    @apply avatar w-[194px] h-[194px] 
+  }
+
   .avatar_md {
     @apply avatar w-[48px] h-[48px] 
   }

@@ -14,7 +14,7 @@ import { ChatStore } from '@/store/.'
 
 import { emojies } from '@/utils/mock/emojies';
 
-import { TextMessageContent, ImageMessageContent, EmojiMessage, MessageActions, VoiceMessageContent } from '..'
+import { TextMessageContent, ImageMessageContent, EmojiMessage, MessageActions, VoiceMessageContent , CallRequstMessageContent, CallEndMessageContent} from '..'
 import IReaction from '@/models/chat/IReaction';
 
 import { Reactions } from '..'
@@ -34,6 +34,8 @@ const Message: React.FC<{message: ITextMessage | any}> = ({message}) => {
   const isVideo = message.role === 'video'
   const isDocument = message.role === "document"
   const isVoice = message.role === 'voice'
+  const isCallRequest = message.role === 'call-request'
+  const isCallEnd = message.role === 'call-ended'
   
   return (
     <div className='flex group items-center group gap-3 p-2 relative '>
@@ -76,6 +78,10 @@ const Message: React.FC<{message: ITextMessage | any}> = ({message}) => {
             isVideo ? <VideoMessage message={message} /> :
 
             isDocument ? <DocuementMessageContent message={message} /> :
+
+            isCallRequest ? <CallRequstMessageContent message={message} /> :
+
+            isCallEnd ? <CallEndMessageContent message={message} /> :
 
             isVoice ? <VoiceMessageContent message={message} /> :
             <TextMessageContent isUser={isUser} message={message} /> }

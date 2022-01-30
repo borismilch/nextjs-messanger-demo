@@ -11,6 +11,7 @@ import Reaction from './chat/IReaction'
 import Document from './chat/IDocumet'
 
 import Mage from './media/IMages'
+import VideoCall, { IVideoEndedCall } from './videoCall/IVideoCall'
 
 
 export interface IUser extends User {}
@@ -24,6 +25,8 @@ export interface IRoom extends Room {}
 export interface IMessage extends Message {}
 export interface IReaction extends Reaction {}
 export interface IPicture extends Mage {}
+
+export interface IVideoEndMessage extends IVideoEndedCall {}
 
 
 export interface ITextMessage extends IMessage {
@@ -65,3 +68,5 @@ export interface IDocumentMessage extends IMessage {
 export interface IVoiceMessage extends IMessage {
   body: { url: string, id: number }
 }
+
+export interface IVideoCall extends VideoCall {}

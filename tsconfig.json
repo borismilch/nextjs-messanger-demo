@@ -32,7 +32,8 @@
       "@/pages/*": ["pages/*"],
       "@/auth/*": ["auth/*"],
       "@/icons/*": ["components/icons/"],
-      "@/service/*": ["services/*"]
+      "@/service/*": ["services/*"],
+      "@/context/*": ["contexts/*"],
     },
   },
 

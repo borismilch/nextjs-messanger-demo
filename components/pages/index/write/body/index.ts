@@ -10,3 +10,4 @@ export { default as EmojiMessage } from './content/EmojiMessage'
 export { default as ImageMessageContent } from './content/ImageMessageContent'
 
 export { default as VoiceMessageContent } from './content/VoiceMessageContent'
+export { CallEndMessageContent, CallRequstMessageContent  } from './content/calls/'

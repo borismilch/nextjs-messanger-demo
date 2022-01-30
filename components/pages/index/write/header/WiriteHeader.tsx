@@ -3,15 +3,36 @@ import Image from 'next/image'
 
 import AppIcon, {IoVideocam, BsTelephoneFill, HiDotsCircleHorizontal, BiDotsHorizontalRounded} from '@/icons/.'
 
-import {IUser} from '@/models/.';
+import {ITextMessage, IUser} from '@/models/.';
+
+import { useNavigation } from '@/hooks/.'
 
 import { observer } from 'mobx-react-lite'
-import { SidebarStore } from '@/store/.'
+import { SidebarStore, ChatStore } from '@/store/.'
+import { MessageService } from '@/service/.'
+import { createMessage } from '@/utils/helpers/createMessage'
+
+import { firestore, auth } from '@/lib/firebase'
+import { addDoc, collection, serverTimestamp } from 'firebase/firestore' 
+import { useAuthState } from 'react-firebase-hooks/auth'
  
 const ChattingHeader: React.FC<{user: IUser}> = ({user}) => {
 
+  const { pushRouter } = useNavigation()
+  const [currentUser] = useAuthState(auth)
+
   const toggleSidebar = () => {
     SidebarStore.changeOpen(!SidebarStore.open)
+  }
+
+  const createCall = async () => {
+    const callRef = collection(firestore, 'calls')
+    const newCall = await addDoc(callRef, { to: user.uid, timeStamp: serverTimestamp(), creator: currentUser.uid, offer: null, roomId: ChatStore.selectedChatId})
+
+    const newMessage = createMessage(newCall.id, currentUser, 'call-request')
+
+    await MessageService.createMessage({} as ITextMessage, ChatStore.selectedChatId, newMessage)
+    pushRouter('/' + newCall.id)
   }
 
   return (
@@ -37,6 +58,7 @@ const ChattingHeader: React.FC<{user: IUser}> = ({user}) => {
         <AppIcon
           Icon={<IoVideocam className='text-2xl text-blue-600' />}
           classes='bg-white p-2'
+          onclick={createCall.bind(null)}
           tooltip={['Video Call', ' tooltip-bottom']}
         />
 

@@ -7,3 +7,4 @@ export { default as VideoStore } from './VideoStore'
 export { default as DocumentStore } from './DocumentStore'
 
 export { default as VoiceMessageStore } from './VoiceMessageStore'
+export { default as VideoChatStore } from './VideoChatStore'

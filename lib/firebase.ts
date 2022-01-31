@@ -4,6 +4,8 @@ import { getStorage } from "firebase/storage";
 import { getFirestore } from 'firebase/firestore'
 import { getAuth, GoogleAuthProvider } from 'firebase/auth'
 
+import { getMessaging, getToken, onMessage } from "firebase/messaging";
+
 const firebaseConfig = {
   apiKey: "AIzaSyC9vzqokPpDKP1FdC07Bx0SqZ9T1iBOyZA",
   authDomain: "yello-351fd.firebaseapp.com",
@@ -18,5 +20,4 @@ const app = initializeApp(firebaseConfig);
 export const storage = getStorage()
 export const firestore = getFirestore()
 export const auth = getAuth()
-
 export const googleProvider = new GoogleAuthProvider()

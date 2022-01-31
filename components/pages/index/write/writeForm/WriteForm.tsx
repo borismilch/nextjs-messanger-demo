@@ -50,6 +50,8 @@ const ChattingFooter = () => {
     }
 
     {RespondMessageStore.message && RespondMessageStore.setMessage(null)}
+
+    {VoiceMessageStore.isVoice && VoiceMessageStore.endVoiceRecord()}
   }
 
   const sendSticker = async () => {
@@ -119,8 +121,6 @@ const ChattingFooter = () => {
       </div>
 
       </div>
-
-    
 
       {ChangeMessageStore.message.body && 
         <AppIcon 

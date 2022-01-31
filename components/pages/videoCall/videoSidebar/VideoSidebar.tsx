@@ -2,7 +2,6 @@ import React from 'react';
 
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 import { observer } from 'mobx-react-lite'
-import { SidebarStore } from '@/store/.'
 
 import { useToggle } from '@/hooks/.'
 
@@ -15,7 +14,7 @@ const VideoSidebar = () => {
 
   return (
     <>
-    <div className={'videoSidebar z-50 ' + (open && "translate-x-0")}>
+    <div className={'videoSidebar translate-x-0 z-50 ' + (open && "translate-x-0")}>
 
       <div 
         className={
@@ -27,7 +26,7 @@ const VideoSidebar = () => {
     
       </div>
 
-      <div className='h-screen transform z-[100] -translate-x-14 md:-translate-x-0 sm:flex items-start p-2'>
+      <div className='h-screen transform z-[100] md:translate-x-4 sm:flex items-start p-2'>
         {open ? (
            <AppIcon 
            Icon={<FaArrowLeft className='text-white text-2xl' />}

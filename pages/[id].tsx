@@ -10,7 +10,7 @@ import { createMessage } from '@/utils/helpers/createMessage'
 import { MessageService } from '@/service/.'
 import { VideoCallContext } from '../contexts';
 
-import { SidebarStore } from '@/store/.'
+import { SidebarStore, ChatStore } from '@/store/.'
 
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { useTimer } from '@/hooks/.'
@@ -18,7 +18,7 @@ import { useTimer } from '@/hooks/.'
 const VideoCall: React.FC<{videoCall: IVideoCall}> = ({videoCall}) => {
   const [currentUser] = useAuthState(auth)
   const {seconds, startTimer, clearTimer} = useTimer()
-  const mode = ( (currentUser.uid === (videoCall.creator)) ? 'create' : 'join')
+  const mode = ( (ChatStore.currentUserId === (videoCall.creator)) ? 'create' : 'join')
 
   const {localRef, remoteRef, hangUp, webcamActive, setupSources, toggleVideo, toggleAudio, activeMicro, sharedScreen, toggleShareScreen} = useVideoChat(videoCall.id + '', mode )
 

@@ -60,7 +60,7 @@
   }
 
   .video_me {
-    @apply rounded-[20px] z-20 fixed overflow-hidden drop-shadow-md w-[250px] h-[180px] bottom-[72%] right-[32%] sm:right-[58%]  md:bottom-2 md:right-2
+    @apply rounded-[20px] z-20 fixed overflow-hidden drop-shadow-md w-[250px] h-[180px] bottom-[72%] right-[32%] sm:right-[64%]  md:bottom-2 md:right-2
   }
 
   .avatar_xl {

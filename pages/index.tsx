@@ -14,7 +14,7 @@ import { firestore, auth } from '@/lib/firebase'
 import { collection, doc, serverTimestamp, updateDoc } from 'firebase/firestore';
 import { useEffect } from 'react';
 
-import {ChatStore, SidebarStore} from '@/store/.'
+import {ChatStore} from '@/store/.'
 
 const Home: NextPage = () => {
 
@@ -29,12 +29,17 @@ const Home: NextPage = () => {
 
     setUserOnline(true)
 
-
     return () => {
       setUserOnline(false)
     }
 
   }, [])
+
+  useEffect(() => {
+    if (user) {
+      ChatStore.setCurrentUserId(user.uid)
+    }
+  }, [user])
 
   if (!user && !loading) { return <Redirect path='/login' /> }
 

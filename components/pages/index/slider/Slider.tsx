@@ -26,9 +26,10 @@ const Slider = () => {
   }, [SliderStore.currentSlideImage, SliderStore.slides])
 
   return (
+
     <div
       onClick={() => SliderStore.clearData()}
-       className='flex z-[1000] fixed inset-0 h-screen w-screen items-center justify-center max-w-screen bg-black bg-opacity-60'>
+       className='flex flex-col z-[1000] fixed inset-0 h-screen w-screen items-center justify-center max-w-screen bg-black bg-opacity-60'>
 
       <div className='flex items-center justify-center md:gap-4'> 
 
@@ -52,8 +53,6 @@ const Slider = () => {
             }
           </div>
 
-         { SliderStore.isLoaded && <SliderThumb  />}
-
         </div>
 
        {!isShort && <button 
@@ -65,7 +64,11 @@ const Slider = () => {
 
       </div>
 
+      { SliderStore.isLoaded && <SliderThumb  />}
+
     </div>
+
+ 
   )
 };
 

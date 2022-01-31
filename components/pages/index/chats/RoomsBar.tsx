@@ -25,7 +25,7 @@ const ChatsBar = () => {
     <>
     { <div 
       onClick={() => SidebarStore.changeOpen(false)}
-      className={'over cursor-pointer ' + (!SidebarStore.open && 'opacity-0 invisible')} />}
+      className={'over cursor-pointer lg:hidden ' + (!SidebarStore.open && 'opacity-0 invisible')} />}
     <div className={'roomSidebar lg:-translate-x-0 ' + (SidebarStore.open && "transform -translate-x-[0px]")}>
 
       <RoomsHeader />

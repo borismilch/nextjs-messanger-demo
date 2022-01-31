@@ -28,7 +28,7 @@ const ImageWithLoader: React.FC<{image: ImageInterface, idx: number, message: IM
         {...bind}
         src={image.url}
         layout='fill'
-        className={ 'cursor-pointer object-cover ' +  (!loaded && 'opacity-0 absolute invisible')}
+        className={ 'cursor-pointer object-cover w-full ' +  (!loaded && 'opacity-0 absolute invisible')}
       />}
 
     

@@ -1,9 +1,7 @@
 import IUser from "@/models/userInterfaces/IUser"
-import IVideoCall, { IVideoEndedCall } from "@/models/videoCall/IVideoCall"
+import { IVideoEndedCall } from "@/models/videoCall/IVideoCall"
 import { createMessage } from "@/utils/helpers/createMessage"
-import { ITextMessage } from "../models"
 
-import { MessageService } from '.'
 import { addDoc, collection, deleteDoc, doc, DocumentData, getDoc, serverTimestamp } from "firebase/firestore"
 import { firestore } from '@/lib/firebase'
 
@@ -19,11 +17,12 @@ class VideoCallService {
 
     const callObject = this.createCallObject(currentUser, user, chatId)
 
-
     const newCall = await addDoc(callRef, callObject)
     const newReq =  await addDoc(incomeRef, {...callObject, callId: newCall.id})
 
     setTimeout(async () => await this.deleteCall(newCall.id, newReq.id, chatId, currentUser) , 30000)
+
+    return newCall.id
   }
 
   static async deleteCall (callId: string, reqId: string, chatId: string, currentUser: IUser) {

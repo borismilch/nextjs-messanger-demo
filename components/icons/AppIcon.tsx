@@ -5,7 +5,7 @@ const AppIcon: React.FC<{Icon: ReactElement<null, null>, shadow?: boolean, oncli
   return (
     <div
       onClick={onclick.bind(null)}
-      className={ ' relative group ' +  (shadow ? 'shadowIcon ' : 'basic_icon ' ) + classes}
+      className={ ' relative group z-10 ' +  (shadow ? 'shadowIcon ' : 'basic_icon ' ) + classes}
     >
       {Icon}
 

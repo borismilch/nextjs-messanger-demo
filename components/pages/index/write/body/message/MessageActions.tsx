@@ -80,11 +80,11 @@ const MessageActions:React.FC<{isUser: boolean, message: IMessage, reactions: IR
         onclick={resendMessage.bind(null)}
       />
 
-      <AppIcon
+      { !(message.role === "call-ended") && <AppIcon
         Icon={<FaComments className=' text-gray-600' />}
         classes='p-1  bg-white'
         onclick={selectMessage.bind(null)}
-      />
+      />}
 
      <div className='relative'>
 
@@ -95,7 +95,7 @@ const MessageActions:React.FC<{isUser: boolean, message: IMessage, reactions: IR
       />
 
       { open && 
-       <div className='absolute transform -translate-x-44 -translate-y-24'>
+       <div className='absolute transform -translate-x-10 z-20 md:-translate-x-44 -translate-y-24'>
         <EmojiPicker 
            changeValue={addReaction}
         />

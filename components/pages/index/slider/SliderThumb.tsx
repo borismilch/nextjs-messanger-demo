@@ -14,7 +14,7 @@ const SliderThumb = () => {
   }
 
   return (
-    <div className='flex items-center p-3 gap-2 justify-center'>
+    <div className='flex items-center z-50 max-w-full overflow-scroll  p-3 gap-2 justify-center'>
 
       {
         SliderStore.slides.map((slide, idx) => (

@@ -32,7 +32,7 @@ const MessageRespond: React.FC<{messageId: string}> = ({messageId}) => {
   const isVoice = message?.role === 'voice'
   
   return (
-    <div className='flex group items-center group gap-3 p-2  opacity-60 mb-3 relative '>
+    <div className='flex group items-center group rounded-xl drop-shadow-xl gap-3 p-2  opacity-60 mb-3 relative '>
   
      {message && <div className='flex items-start gap-3'>
 
@@ -60,7 +60,7 @@ const MessageRespond: React.FC<{messageId: string}> = ({messageId}) => {
             <TextMessageContent isUser={isUser} message={message as any} /> }
 
           <div className='flex items-center gap-3'>
-              <p className='text-sm font-semibold text-gray-700 transform right-0 absolute -bottom-2'>replyed by: {message.username}</p>
+              <p className='text-sm font-semibold truncate max-w-[120px] text-gray-700 transform right-0 absolute -bottom-2'>replyed by: {message.username}</p>
           </div>
 
         </div>

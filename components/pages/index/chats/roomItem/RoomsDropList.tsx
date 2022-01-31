@@ -17,6 +17,8 @@ import IUser from '@/models/userInterfaces/IUser';
 import { ChatStore } from '@/store/.'
 import { observer } from 'mobx-react-lite'
 
+import { useNavigation } from '@/hooks/.'
+
 const ChatItemDropList: React.FC<{onClose: () => void, room: IRoom}> = ({onClose, room}) => {
 
   const [currentUser] = useAuthState(auth)
@@ -24,9 +26,12 @@ const ChatItemDropList: React.FC<{onClose: () => void, room: IRoom}> = ({onClose
 
   const sendUser = {...user?.data(), uid: user?.id} as IUser
 
+  const { pushRouter } = useNavigation()
+
   const createCall = async () => {
-    await VideoCallService.createVideoCall(currentUser, sendUser, room.id)
+    const callId = await VideoCallService.createVideoCall(currentUser, sendUser, room.id)
     ChatStore.selectChat(room.id, sendUser.uid)
+    pushRouter('/' + callId)
   }
 
   const deleteChat = async () => {

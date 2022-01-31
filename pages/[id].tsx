@@ -68,12 +68,11 @@ const VideoCall: React.FC<{videoCall: IVideoCall}> = ({videoCall}) => {
         autoPlay
         playsInline
 
-        className={" w-[250px] h-[200px] rounded-[20px] transition-opacity duration-200 " + (!localRef?.current?.srcObject && 'opacity-0 absolute') }
+        className={" w-[200px] h-[150px]  md:w-[250px] md:h-[200px] rounded-[20px] transition-opacity duration-200 " + (!localRef?.current?.srcObject && 'opacity-0 absolute') }
         muted
       /> 
-       <VideoCallPlaceholder userId={videoCall.to} big={false} />
       
-
+      
       </div>
 
         <div className='flex items-center h-full justify-center bg-black bg-opacity-95 inset-0 absolute'>
@@ -90,8 +89,6 @@ const VideoCall: React.FC<{videoCall: IVideoCall}> = ({videoCall}) => {
             className={"h-screen w-screen  transition-all opacity-100 duration-200 " + (!remoteRef.current?.srcObject && "opacity-0 absolute")  }
           />
 
-          { !remoteRef.current?.srcObject && <VideoCallPlaceholder userId={videoCall.creator} big /> }
- 
           </div>
 
           <VideoCallActions />

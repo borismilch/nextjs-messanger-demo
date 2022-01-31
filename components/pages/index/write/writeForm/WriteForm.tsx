@@ -84,6 +84,9 @@ const ChattingFooter = () => {
 
      { !ChangeMessageStore.message.body && !value && !MediaStore.files.length && !VideoStore.files.length && !VoiceMessageStore.isVoice && <WriteFormActions />}
 
+     <div className='items-center gap-2 flex w-full'>
+ 
+
      { MediaStore.files.length > 0 ? <ImageInput lastMessage={lastMessage} /> :
       VideoStore.files[0] ? <VideoInput lastMessage={lastMessage}  /> :
 
@@ -114,6 +117,10 @@ const ChattingFooter = () => {
         } 
 
       </div>
+
+      </div>
+
+    
 
       {ChangeMessageStore.message.body && 
         <AppIcon 

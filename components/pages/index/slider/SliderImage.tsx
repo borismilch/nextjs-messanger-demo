@@ -15,8 +15,8 @@ const SliderImage: React.FC<{slide: ISlide, idx: number}> = ({slide, idx}) => {
   }, [loaded])
 
   return (
-    <div className='md:w-auto w-[320px]  max-w-screen'>
-    { !loaded && SliderStore.currentSlideImage === idx && <div className='w-[400px] h-full flex items-center justify-center'>
+    <div className='md:w-auto w-full max-w-[320px] items-center justify-center max-w-screen'>
+    { !loaded && SliderStore.currentSlideImage === idx && <div className=' w-full max-w-[400px] h-full flex items-center justify-center'>
       <SmallLoader size={7} color='text-blue-500' />
     </div> }
 
@@ -25,7 +25,7 @@ const SliderImage: React.FC<{slide: ISlide, idx: number}> = ({slide, idx}) => {
         {<img  
           {...bind}
           src={slide.url}
-          className={'absolute opacity-0 md:w-auto w-[320px] max-h-[88vh] max-w-screen   ' + (SliderStore.currentSlideImage === idx && "relative opacity-100 visible")}
+          className={'absolute opacity-0 md:w-auto max-w-[320px] max-h-[88vh] max-w-screen   ' + (SliderStore.currentSlideImage === idx && "relative opacity-100 visible")}
           style={{opacity: SliderStore.currentSlideImage === idx ? 1 : 0}}
         />}
       </div>

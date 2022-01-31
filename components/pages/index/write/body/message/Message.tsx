@@ -22,7 +22,7 @@ import { VideoMessage } from '../content';
 
 import { DocuementMessageContent } from '../content'
 
-const Message: React.FC<{message: ITextMessage | any}> = ({message}) => {
+const Message: React.FC<{message: ITextMessage | any, isVideoCall?:boolean}> = ({message, isVideoCall = false}) => {
 
   const [user] = useAuthState(auth)
 
@@ -40,8 +40,17 @@ const Message: React.FC<{message: ITextMessage | any}> = ({message}) => {
     <div className='flex group items-center group gap-3 p-2 relative '>
       {
        isUser && (
-        <>
-          <div className={'tooltip relative z-40 ml-auto' }>
+        <div className='flex items-center ml-auto  justify-center'>
+
+          <div className={'flex items-center w-0 md:w-auto flex-col-reverse gap-2 lg:gap-0 md:flex-row  absolute md:relative right-20 -bottom-12 md:right-0 md:bottom-0 '}
+          
+            style={{width: isVideoCall &&  0, position: isVideoCall ? 'absolute' : 'relative', right: isVideoCall && 120, alignItems:"center",
+            bottom: -40, flexDirection: "column-reverse"
+          }}
+          >
+
+         
+          <div className={'tooltip relative z-40 lg:ml-auto' }>
             {dayts((message?.createdAt?.seconds || 1) * 1000).fromNow()}
           </div>
 
@@ -51,7 +60,9 @@ const Message: React.FC<{message: ITextMessage | any}> = ({message}) => {
             isUser 
           />
 
-        </>
+          </div>
+
+        </div>
        )
       }
   
@@ -95,7 +106,9 @@ const Message: React.FC<{message: ITextMessage | any}> = ({message}) => {
 
       {
         !isUser && (
-          <>
+          <div className='flex items-center mr-auto   flex-col-reverse gap-2 lg:gap-0 md:flex-row justify-center'>
+
+           <div className={'flex items-center -bottom-5  left-20 md:left-0 md:bottom-0 md:w-auto absolute md:relative gap-1 ' + (isVideoCall && "w-0 absolute left-20 -bottom-12  flex-col-reverse gap-2 ")}>
          
             <MessageActions 
               reactions={reactions?.docs.map(doc => ({...doc?.data(), id:doc.id} as IReaction))} 
@@ -103,11 +116,14 @@ const Message: React.FC<{message: ITextMessage | any}> = ({message}) => {
               isUser={false} 
             />
 
-            <div className={'tooltip relative z-40 mr-auto' }>
-            {dayts((message?.createdAt?.seconds || 1) * 1000).fromNow()}
-          </div>
+           
 
-          </>
+            <div className={'tooltip relative z-40 mr-auto' }>
+              {dayts((message?.createdAt?.seconds || 1) * 1000).fromNow()}
+            </div>
+
+          </div>
+          </div>
         )
       }
 

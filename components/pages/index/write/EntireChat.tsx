@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import { WriteBody, WriteForm, WiriteHeader } from '.'
 
 import { firestore } from '@/lib/firebase'
-import { useCollection, useCollectionData, useDocument } from 'react-firebase-hooks/firestore';
+import { useCollection, useDocument } from 'react-firebase-hooks/firestore';
 import { doc, collection } from 'firebase/firestore'
 import IUser from '@/models/userInterfaces/IUser';
 import { Slider } from '../slider';
@@ -13,7 +13,7 @@ import { SliderStore, ChatStore } from '@/store/.'
 import { VideoCallRequest } from '@/components/pages/videoCall'
 import { IVideoCallRequest } from '@/models/.';
 
-const EntireChat = () => {
+const EntireChat: React.FC<{isVideoCall?: boolean}> = ({isVideoCall}) => {
 
   const [user] = useDocument(doc(firestore, 'users', ChatStore.selectedUserId))
 
@@ -24,14 +24,24 @@ const EntireChat = () => {
 
      { requests?.docs.length ?
        requests.docs.map(item => (
-        <VideoCallRequest key={item.id} request={{...item.data(), id: item.id} as IVideoCallRequest} />
+        <>
+         { !isVideoCall &&
+        <VideoCallRequest
+           key={item.id} 
+           request={{...item.data(), id: item.id} as IVideoCallRequest} 
+         /> }
+         </>
        )) :
-      <WiriteHeader user={{...user?.data(), uid: user?.id} as IUser} />
+       <>{ !isVideoCall && 
+        <WiriteHeader 
+          isVideoCall={isVideoCall} 
+          user={{...user?.data(), uid: user?.id} as IUser} 
+        />} </>
      }
 
-      <WriteBody user={{...user?.data(), uid: user?.id} as IUser} />
+      <WriteBody isVideoCall={isVideoCall} user={{...user?.data(), uid: user?.id} as IUser} />
 
-      <WriteForm />
+    {!isVideoCall &&  <WriteForm  />}
 
       { SliderStore.slides.length > 0 && <Slider /> }
 

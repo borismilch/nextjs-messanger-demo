@@ -22,7 +22,7 @@ const HelpPlaceholder = () => {
        
         <div
           onClick={() => SidebarStore.changeOpen(true)}
-           className='flex py-3 text-gray-800 text-3xl font-medium flex-col text-center'>
+           className='flex py-3 text-blue-500 text-3xl font-medium flex-col text-center'>
           Start communicate right now!
         </div>
 

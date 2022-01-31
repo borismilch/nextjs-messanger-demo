@@ -11,7 +11,7 @@ const TextMessageContent: React.FC<{message: ITextMessage, isUser: boolean}> = (
       'users_message rounded-tr-md ' : 'friend_message rounded-tl-md ') + round}>
 
     <div className={"flex flex-col break-words " + (isUser && 'items-end')} >
-      {message.body.split("_|_").map((item: string) => (
+      { message.body.split && message.body.split("_|_").map((item: string) => (
         <p className='break-words max-w-[466px]' key={item}>{item}</p>
       ))}
    </div>

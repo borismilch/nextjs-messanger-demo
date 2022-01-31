@@ -12,23 +12,25 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 import { VideoCallService } from '@/service/.'
 
 import { HiMenu } from 'react-icons/hi'
+import { useNavigation } from '@/hooks/.'
  
-const ChattingHeader: React.FC<{user: IUser}> = ({user}) => {
+const ChattingHeader: React.FC<{user: IUser, isVideoCall: boolean}> = ({user, isVideoCall}) => {
   const [currentUser] = useAuthState(auth)
+  const {pushRouter} = useNavigation()
 
   const toggleSidebar = () => {
     SidebarStore.changeOpen(!SidebarStore.open)
   }
 
   const createCall = async () => {
-   await VideoCallService.createVideoCall(currentUser, user, ChatStore.selectedChatId)
+    const callId = await VideoCallService.createVideoCall(currentUser, user, ChatStore.selectedChatId)
+    pushRouter('/' + callId)
   }
 
   return (
-    <div className='p-3  flex justify-between items-center z-30 bg-white border-b border-r border-gray-300 drop-shadow-sm'>
+    <div className={'p-3  flex justify-between items-center z-30 bg-white border-b border-r border-gray-300 drop-shadow-sm '}>
 
       <div className='flex items-center gap-3'>
-
         
       <div className='flex lg:hidden'>
         <AppIcon 
@@ -48,12 +50,16 @@ const ChattingHeader: React.FC<{user: IUser}> = ({user}) => {
           />
         </div>}
 
-        <h2 className='text-lg hover:underline cursor-pointer font-semibold'>
+        
+        <div className='truncate'>
+        <h2 className='text-lg flex-shrink max-w-[60px] sm:max-w-[100px] truncate hover:underline cursor-pointer font-semibold'>
           {user?.displayName}
         </h2>
+        </div>
+     
       </div>
 
-      <div className='flex items-center gap-3'>
+      {!isVideoCall && <div className='flex items-center gap-3'>
         <AppIcon
           Icon={<IoVideocam className='text-2xl text-blue-600' />}
           classes='bg-white p-2'
@@ -78,7 +84,7 @@ const ChattingHeader: React.FC<{user: IUser}> = ({user}) => {
         />
 
       </div>
-
+}
     </div>
   )
 };

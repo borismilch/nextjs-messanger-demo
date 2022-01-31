@@ -22,7 +22,7 @@ import { VideoMessage } from '../content';
 
 import { DocuementMessageContent } from '../content'
 
-const Message: React.FC<{message: ITextMessage | any, isVideoCall?:boolean}> = ({message, isVideoCall = false}) => {
+const Message: React.FC<{message: ITextMessage | any , isVideoCall?:boolean}> = ({message, isVideoCall = false}) => {
 
   const [user] = useAuthState(auth)
 
@@ -70,7 +70,7 @@ const Message: React.FC<{message: ITextMessage | any, isVideoCall?:boolean}> = (
 
         { !isUser && <div className='avatar_sm'>
         <Image 
-          src={user?.photoURL}
+          src={message.userImage}
           layout='fill'
           objectFit='cover'
           alt='fff'

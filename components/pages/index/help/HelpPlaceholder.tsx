@@ -6,7 +6,7 @@ import { SidebarStore } from '@/store/.'
 
 const HelpPlaceholder = () => {
   return (
-    <div className='w-full hidden lg:flex h-screen items-center justify-center '>
+    <div className='w-full flex h-screen items-center justify-center '>
 
       <div className='flex flex-col gap-2 justify-center items-center p-5  bg-white drop-shadow-lg '>
 

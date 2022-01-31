@@ -2,10 +2,11 @@ import React from 'react';
 import { RespondMessageStore } from '@/store/.'
 
 import { observer } from 'mobx-react-lite'
+import { IoMdClose } from '@/components/icons'
 
 const WriteFormRespond = () => {
   return (
-    <div className='respondBanner'>
+    <div className='respondBanner p-3 opacity-100 bg-opacity-70'>
 
       <p
         className='text-sm font-medium text-gray-700'>
@@ -24,7 +25,9 @@ const WriteFormRespond = () => {
 
       <p
         onClick={() => RespondMessageStore.setMessage(null)}
-        className='text-2xl text-blue-500 cursor-pointer'>&times;</p>
+        className='text-2xl text-blue-500 cursor-pointer'>
+          <IoMdClose  />
+        </p>
 
      </div>
 

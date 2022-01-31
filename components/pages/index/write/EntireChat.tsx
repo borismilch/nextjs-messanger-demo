@@ -24,7 +24,7 @@ const EntireChat = () => {
 
      { requests?.docs.length ?
        requests.docs.map(item => (
-        <VideoCallRequest request={{...item.data(), id: item.id} as IVideoCallRequest} />
+        <VideoCallRequest key={item.id} request={{...item.data(), id: item.id} as IVideoCallRequest} />
        )) :
       <WiriteHeader user={{...user?.data(), uid: user?.id} as IUser} />
      }

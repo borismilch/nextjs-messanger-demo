@@ -73,7 +73,7 @@ const CallRequest: React.FC<{request: IVideoCallRequest}> = ({request}) => {
         />
 
         <span 
-          class="animate-ping 
+          className="animate-ping 
           absolute inline-flex 
           h-full w-full rounded-full 
           bg-emerald-400 opacity-75" 

@@ -10,7 +10,7 @@ const WriteFormRespond = () => {
 
       <p
         className='text-sm font-medium text-gray-700'>
-          Respond on {RespondMessageStore.message.username}'s message
+          Respond on {RespondMessageStore.message.username}&apos;s message
       </p>
 
      <div className='flex items-center gap-2'>

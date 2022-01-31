@@ -2,23 +2,18 @@ import React from 'react';
 import Image from 'next/image'
 
 import AppIcon, {IoVideocam, BsTelephoneFill, HiDotsCircleHorizontal, BiDotsHorizontalRounded} from '@/icons/.'
-
-import {ITextMessage, IUser} from '@/models/.';
-
-import { useNavigation } from '@/hooks/.'
+import {IUser} from '@/models/.';
 
 import { observer } from 'mobx-react-lite'
 import { SidebarStore, ChatStore } from '@/store/.'
-import { MessageService } from '@/service/.'
-import { createMessage } from '@/utils/helpers/createMessage'
-
-import { firestore, auth } from '@/lib/firebase'
-import { addDoc, collection, serverTimestamp } from 'firebase/firestore' 
+import { auth } from '@/lib/firebase'
 import { useAuthState } from 'react-firebase-hooks/auth'
+
+import { VideoCallService } from '@/service/.'
+
+import { HiMenu } from 'react-icons/hi'
  
 const ChattingHeader: React.FC<{user: IUser}> = ({user}) => {
-
-  const { pushRouter } = useNavigation()
   const [currentUser] = useAuthState(auth)
 
   const toggleSidebar = () => {
@@ -26,19 +21,23 @@ const ChattingHeader: React.FC<{user: IUser}> = ({user}) => {
   }
 
   const createCall = async () => {
-    const callRef = collection(firestore, 'calls')
-    const newCall = await addDoc(callRef, { to: user.uid, timeStamp: serverTimestamp(), creator: currentUser.uid, offer: null, roomId: ChatStore.selectedChatId})
-
-    const newMessage = createMessage(newCall.id, currentUser, 'call-request')
-
-    await MessageService.createMessage({} as ITextMessage, ChatStore.selectedChatId, newMessage)
-    pushRouter('/' + newCall.id)
+   await VideoCallService.createVideoCall(currentUser, user, ChatStore.selectedChatId)
   }
 
   return (
-    <div className='p-3  flex justify-between items-center bg-white border-b border-r border-gray-300 drop-shadow-sm'>
+    <div className='p-3  flex justify-between items-center z-30 bg-white border-b border-r border-gray-300 drop-shadow-sm'>
 
       <div className='flex items-center gap-3'>
+
+        
+      <div className='flex lg:hidden'>
+        <AppIcon 
+          Icon={<HiMenu className="text-gray-700 text-xl " />}
+          classes='p-2 bg-white'
+          onclick={() => SidebarStore.changeOpen(!SidebarStore.open)}
+        />
+
+      </div>
 
         { user?.photoURL && <div className='avatar_sm brightness-100'>
           <Image 
@@ -66,6 +65,7 @@ const ChattingHeader: React.FC<{user: IUser}> = ({user}) => {
           Icon={<BsTelephoneFill className='text-xl text-blue-600' />}
           classes='bg-white p-2'
           tooltip={['Phone Call', ' tooltip-bottom']}
+          onclick={createCall.bind(null)}
         />
 
         <AppIcon

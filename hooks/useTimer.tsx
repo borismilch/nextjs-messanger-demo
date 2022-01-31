@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react'
 
-const useTimer = () => {
+const useTimer = (instant = false) => {
 
   const [seconds, setSeconds] = useState<number>(0)
   const [timer, setTimer] = useState(null)
@@ -13,6 +13,12 @@ const useTimer = () => {
   const clearTimer = () => {
     clearInterval(timer)
   }
+
+  instant && useEffect(() => {
+    startTimer()
+
+    return () => clearTimer()
+  }, [])
 
   return {
     seconds,

@@ -1,4 +1,4 @@
-import React, { createContext } from 'react'
+import React, { createContext, Dispatch, Ref, SetStateAction, RefObject } from 'react'
 
 export interface VideoCallContextData {
   hangUpCall: () => Promise<void>
@@ -8,7 +8,10 @@ export interface VideoCallContextData {
   toggleVideo: () => void
   toggleAudio: () => void
   toggleShareScreen: () => void, 
-  sharedScreen: boolean
+  sharedScreen: boolean,
+  parentElementReF: RefObject<HTMLDivElement>
+  setFullScreen: (val: boolean) => void
+  isFullscreen: boolean
 }
 
 export const VideoCallContext = createContext<VideoCallContextData>({} as VideoCallContextData)

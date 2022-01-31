@@ -60,7 +60,7 @@ const ChatItem: React.FC<{room: IRoom}> = ({room}) => {
       </div>
       
       <div className='ml-auto'>
-        <ChatItemOptions open={open} changeOpen={changeOpen} />
+        <ChatItemOptions open={open} changeOpen={changeOpen} room={room} />
       </div>
 
 

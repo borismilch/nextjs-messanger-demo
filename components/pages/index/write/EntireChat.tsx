@@ -1,24 +1,33 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { WriteBody, WriteForm, WiriteHeader } from '.'
 
 import { firestore } from '@/lib/firebase'
-import { useDocument } from 'react-firebase-hooks/firestore';
-import { doc } from 'firebase/firestore'
-import { ChatStore } from '@/store/.'
+import { useCollection, useCollectionData, useDocument } from 'react-firebase-hooks/firestore';
+import { doc, collection } from 'firebase/firestore'
 import IUser from '@/models/userInterfaces/IUser';
 import { Slider } from '../slider';
 import { observer } from 'mobx-react-lite';
-import { SliderStore } from '@/store/.'
+import { SliderStore, ChatStore } from '@/store/.'
+
+import { VideoCallRequest } from '@/components/pages/videoCall'
+import { IVideoCallRequest } from '@/models/.';
 
 const EntireChat = () => {
 
   const [user] = useDocument(doc(firestore, 'users', ChatStore.selectedUserId))
 
+  const [requests] = useCollection(collection(firestore, 'rooms', ChatStore.selectedChatId, 'incomingCalls'))
+
   return (
     <div className='flex flex-col relative flex-grow'>
 
+     { requests?.docs.length ?
+       requests.docs.map(item => (
+        <VideoCallRequest request={{...item.data(), id: item.id} as IVideoCallRequest} />
+       )) :
       <WiriteHeader user={{...user?.data(), uid: user?.id} as IUser} />
+     }
 
       <WriteBody user={{...user?.data(), uid: user?.id} as IUser} />
 

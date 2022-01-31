@@ -1,6 +1,6 @@
 import React, { SyntheticEvent, useEffect, useState } from 'react';
 
-import { WriteFormActions } from '..'
+import { WriteFormActions, WriteFormRespond } from '..'
 import AppIcon, { IoMdClose } from '@/icons/.'
 
 import { useInputValue } from '@/hooks/.'
@@ -11,7 +11,8 @@ import { ITextMessage } from '@/models/.'
 import { collection,  updateDoc, doc, query, orderBy, limit } from 'firebase/firestore'
 import { createMessage } from '@/utils/helpers/createMessage'
 
-import { ChatStore, ChangeMessageStore, MediaStore , VideoStore, DocumentStore, VoiceMessageStore} from '@/store/.'
+import { ChatStore, ChangeMessageStore, MediaStore , VideoStore, DocumentStore, VoiceMessageStore, 
+  RespondMessageStore} from '@/store/.'
 
 import { ImageInput } from '@/components/pages/index/write/writeForm'
 
@@ -32,12 +33,10 @@ const ChattingFooter = () => {
   const [lastMessage, setLastMessage] = useState<ITextMessage>({} as ITextMessage)
 
   const sendMessage = async (e: SyntheticEvent<HTMLFormElement>) => {
-
     e.preventDefault()
     if (!value) { return }
 
     const message: ITextMessage = createMessage(value, user)
-    
     cleanValue()
 
     if (ChangeMessageStore.message.body) {
@@ -45,16 +44,16 @@ const ChattingFooter = () => {
       ChangeMessageStore.setMessage({} as ITextMessage)
       await updateDoc(updateMessageRef, {body:message.body})
     }
-
     else {
-      await MessageService.updateOrCreateMessage(lastMessage, ChatStore.selectedChatId, user, value, message)
+      await MessageService.updateOrCreateMessage(lastMessage, ChatStore.selectedChatId, user, value, 
+        RespondMessageStore.message ? {...message, respond: RespondMessageStore.message.id } : message)
     }
+
+    {RespondMessageStore.message && RespondMessageStore.setMessage(null)}
   }
 
   const sendSticker = async () => {
-
     const message: ITextMessage = createMessage('☠', user)
-
     await  MessageService.updateOrCreateMessage(lastMessage, ChatStore.selectedChatId, user, value, message )
   }
 
@@ -77,7 +76,11 @@ const ChattingFooter = () => {
   }, [ChangeMessageStore.message])
 
   return (
-    <div className='flex items-center w-full gap-3 p-3 drop-shadow border-t border-r border-gray-300'>
+    <>
+      {RespondMessageStore.message && <WriteFormRespond /> }
+    <div  
+      className='
+      flex items-center w-full gap-3 p-3 drop-shadow border-t border-r border-gray-300'>
 
      { !ChangeMessageStore.message.body && !value && !MediaStore.files.length && !VideoStore.files.length && !VoiceMessageStore.isVoice && <WriteFormActions />}
 
@@ -131,6 +134,8 @@ const ChattingFooter = () => {
       }
       
     </div>
+
+    </>
   )
 };
 

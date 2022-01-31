@@ -30,6 +30,14 @@ const WriteMesssages: React.FC<{user: IUser}> = ({user}) => {
 
   }, [messages])
 
+  useEffect(() => {
+    chatRef.current.scrollBy({
+      left: 0,
+      top: 10000000,
+      behavior: "smooth"
+    })
+  }, [])
+
   return (
     <div 
       ref={chatRef}
@@ -40,15 +48,17 @@ const WriteMesssages: React.FC<{user: IUser}> = ({user}) => {
       />}
 
       {
-        messages?.docs?.map(item => !(item.data().role === 'time') ?  (
-          <Message
-            key={item.id}
-           message={{...item.data(), id: item.id} as ITextMessage} 
-          />
-        ) : <TimeMessage
-              message={{...item.data(), id: item.id} as ITimeMessage}
-              key={item.id}  
-            />)
+        messages?.docs?.map(item => (item.data().role === 'time') ?  (
+         <TimeMessage
+            message={{...item.data(), id: item.id} as ITimeMessage}
+            key={item.id}  
+          />) 
+          :
+            <Message
+              key={item.id}
+              message={{...item.data(), id: item.id} as ITextMessage} 
+            />
+          )
       }
 
     </div>

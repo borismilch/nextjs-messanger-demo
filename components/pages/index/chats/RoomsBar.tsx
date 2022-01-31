@@ -8,6 +8,8 @@ import RoomsHeader from './roomHeader/RoomsHeader';
 import { useCollection } from 'react-firebase-hooks/firestore'
 import { useAuthState } from 'react-firebase-hooks/auth'
 
+import { SidebarStore } from '@/store/.'
+import { observer } from 'mobx-react-lite'
 import { firestore, auth } from '@/lib/firebase'
 
 import { collection, query, where } from 'firebase/firestore'
@@ -20,7 +22,11 @@ const ChatsBar = () => {
   const [rooms] = useCollection( query(collection(firestore, 'rooms'), where("members", 'array-contains', user?.uid || 'ddd  ')) )
 
   return (
-    <div className='flex flex-col w-full border-r border-gray-300 drop-shadow max-w-[360px] p-3 pl-1 relative'>
+    <>
+    { <div 
+      onClick={() => SidebarStore.changeOpen(false)}
+      className={'over cursor-pointer ' + (!SidebarStore.open && 'opacity-0 invisible')} />}
+    <div className={'roomSidebar lg:-translate-x-0 ' + (SidebarStore.open && "transform -translate-x-[0px]")}>
 
       <RoomsHeader />
      
@@ -44,7 +50,9 @@ const ChatsBar = () => {
       </div>
 
     </div>
+
+    </>
   )
 };
 
-export default ChatsBar;
+export default observer(ChatsBar);

@@ -4,45 +4,64 @@ import { DropList } from '@/components/forms/droplist';
 
 import { IDropItem } from '@/models/.';
 
-import { BsArchiveFill, BsTelephoneFill, IoVideocam, IoWarning, MdDelete } from '@/icons/export'
+import {  BsTelephoneFill, IoVideocam,  MdDelete } from '@/icons/export'
+import { VideoCallService } from '@/service/.'
 
-const ChatItemDropList: React.FC<{onClose: () => void}> = ({onClose}) => {
+import { useAuthState } from 'react-firebase-hooks/auth'
+import { auth, firestore } from '@/lib/firebase'
+import IRoom from '@/models/chat/IRoom';
+
+import { deleteDoc, doc } from 'firebase/firestore'
+import { useDocument } from 'react-firebase-hooks/firestore'
+import IUser from '@/models/userInterfaces/IUser';
+import { ChatStore } from '@/store/.'
+import { observer } from 'mobx-react-lite'
+
+const ChatItemDropList: React.FC<{onClose: () => void, room: IRoom}> = ({onClose, room}) => {
+
+  const [currentUser] = useAuthState(auth)
+  const [user] = useDocument(doc(firestore, 'users', room.members.find(item => item !== currentUser.uid)))
+
+  const sendUser = {...user?.data(), uid: user?.id} as IUser
+
+  const createCall = async () => {
+    await VideoCallService.createVideoCall(currentUser, sendUser, room.id)
+    ChatStore.selectChat(room.id, sendUser.uid)
+  }
+
+  const deleteChat = async () => {
+    const roomRef = doc(firestore, 'rooms', room.id)
+
+    const confirmed = confirm('Are you sure?')
+
+    if (!confirmed) { return }
+
+    await deleteDoc(roomRef)
+  }
 
   const items: IDropItem[] = [
     {
       Icon: <BsTelephoneFill className='text-xl' />,
       divide: false,
-      onClick: () => {},
+      onClick: createCall.bind(null),
       text: 'Phone call'
     },
 
     {
       Icon: <IoVideocam className='text-xl' />,
-      divide: true,
-      onClick: () => {},
+      divide: false,
+      onClick: createCall.bind(null),
       text: 'Video call'
     },
 
     {
       Icon: <MdDelete className='text-xl' />,
       divide: false,
-      onClick: () => {},
+      onClick: deleteChat.bind(null),
       text: 'Delete this chat'
     },
 
-    {
-      Icon: <BsArchiveFill className='text-xl' />,
-      divide: false,
-      onClick: () => {},
-      text: 'Archieve this chat'
-    },
 
-    {
-      Icon: <IoWarning className='text-xl' />,
-      divide: false,
-      onClick: () => {},
-      text: 'Report about issues'
-    },
   ]
 
   return (
@@ -52,4 +71,4 @@ const ChatItemDropList: React.FC<{onClose: () => void}> = ({onClose}) => {
   )
 };
 
-export default ChatItemDropList;
+export default observer(ChatItemDropList);

@@ -8,6 +8,8 @@ import Room from './chat/IRoom'
 import Message from './chat/IMessage'
 import Reaction from './chat/IReaction'
 
+import VideoCallRequest from './videoCall/VideoCallrequest'
+
 import Document from './chat/IDocumet'
 
 import Mage from './media/IMages'
@@ -70,3 +72,5 @@ export interface IVoiceMessage extends IMessage {
 }
 
 export interface IVideoCall extends VideoCall {}
+
+export interface IVideoCallRequest extends VideoCallRequest {}

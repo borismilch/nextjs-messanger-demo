@@ -2,7 +2,8 @@ import { makeAutoObservable } from 'mobx'
 
 class SidebarStore {
 
-  open: boolean = true
+  open: boolean = false
+  chatOpen: boolean = false
 
   constructor () {
     makeAutoObservable(this)
@@ -11,6 +12,10 @@ class SidebarStore {
   changeOpen (val: boolean) {
     this.open = val
     console.log(val)
+  }
+
+  changeSidebarOpen (val: boolean) {
+    this.chatOpen = val
   }
 
 }

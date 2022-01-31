@@ -26,40 +26,7 @@ const ChatHeaderDropList: React.FC<{onClose: () => void}> = ({onClose}) => {
   }
 
   const items: IDropItem[] = [
-    {
-      Icon: <IoSettingsSharp className='text-xl' />,
-      divide: true,
-      onClick: () => {},
-      text: 'Preferences'
-    },
 
-    {
-      Icon: <MdMarkChatUnread className='text-xl' />,
-      divide: false,
-      onClick: () => {},
-      text: 'Active Contacts'
-    },
-
-    {
-      Icon: <IoChatbubbles className='text-xl' />,
-      divide: false,
-      onClick: () => {},
-      text: 'Chatting requests'
-    },
-
-    {
-      Icon: <BsArchiveFill className='text-xl' />,
-      divide: true,
-      onClick: () => {},
-      text: 'Messages Archive'
-    },
-
-    {
-      Icon: <SiMessenger className='text-xl' />,
-      divide: false,
-      onClick: () => {},
-      text: 'Download messanger for windows'
-    },
 
     {
       Icon: <HiOutlineLogout className='text-xl' />,
@@ -72,7 +39,7 @@ const ChatHeaderDropList: React.FC<{onClose: () => void}> = ({onClose}) => {
   ] 
 
   return (
-    <div onClick={onClose.bind(null)} className='bg-white z-10 '>
+    <div onClick={onClose.bind(null)} className='bg-white z-40 '>
       <DropList dropItems={items} />
     </div>
   )

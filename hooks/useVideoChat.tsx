@@ -37,6 +37,8 @@ interface useVideoChatResult {
 
  const useVideoChat: (callId: string, mode: string) => useVideoChatResult = (callId, mode, ) => {
 
+  const pc = new RTCPeerConnection(servers);
+
   const [webcamActive, setWebcamActive] = useState(false);
   const [activeMicro, setMicroActive] = useState(false)
   const [roomId, setRoomId] = useState(ChatStore.selectedChatId);
@@ -256,7 +258,7 @@ interface useVideoChatResult {
 
   const hangUp = async () => {
    
-
+    pc.close()
     if (VideoChatStore.currentVideoChat) {
       const roomRef = doc(firestore, 'calls', VideoChatStore.currentVideoChat) 
     
@@ -269,6 +271,7 @@ interface useVideoChatResult {
       }) 
   
       await deleteDoc(roomRef)
+      window.location.reload()
     }
     pushRouter('/')
   }

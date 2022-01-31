@@ -5,7 +5,7 @@ import { observer } from 'mobx-react-lite'
 
 import { RoomsBar } from '@/components/pages/index/chats';
 import { EntireChat } from '@/components/pages/index/write';
-import { Help } from '@/components/pages/index/help';
+import { Help, HelpPlaceholder } from '@/components/pages/index/help';
 
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { Redirect } from '@/auth/.'
@@ -46,14 +46,14 @@ const Home: NextPage = () => {
 
        { ChatStore.selectedChatId ? <EntireChat /> : <div className='flex flex-grow' />}
 
-       { SidebarStore.open &&  
+       { (ChatStore.selectedUserId) ? 
          <div 
-           className='w-[400px] transition-all duration-200 hidden md:flex flex-col'>
+           className='w-[400px] hidden xl:flex transition-all duration-200   flex-col'>
              
            <Help />
 
-        </div>
-      }
+         </div> : <HelpPlaceholder />
+       }
 
       </div>
          

@@ -8,3 +8,5 @@ export { default as DocumentStore } from './DocumentStore'
 
 export { default as VoiceMessageStore } from './VoiceMessageStore'
 export { default as VideoChatStore } from './VideoChatStore'
+export { default as RespondMessageStore } from './RespondMessageStore'
+export { default as ResendMessageStore } from './ResendMessageStore'

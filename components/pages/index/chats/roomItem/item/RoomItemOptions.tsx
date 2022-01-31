@@ -1,9 +1,10 @@
 import AppIcon from '@/components/icons';
+import IRoom from '@/models/chat/IRoom';
 import dynamic from 'next/dynamic';
 import React, { Suspense } from 'react';
 import { BiDotsHorizontalRounded } from 'react-icons/bi';
 
-const ChatItemOptions: React.FC<{open: boolean, changeOpen: (val: boolean) => void}> = ({open, changeOpen}) => {
+const ChatItemOptions: React.FC<{open: boolean, changeOpen: (val: boolean) => void, room: IRoom}> = ({open, changeOpen, room}) => {
 
   const ChatItemDropList = dynamic(() => import('../RoomsDropList'))
 
@@ -20,7 +21,7 @@ const ChatItemOptions: React.FC<{open: boolean, changeOpen: (val: boolean) => vo
 
       <Suspense fallback={ <p>Loading...</p> }>
         
-        <ChatItemDropList onClose={changeOpen.bind(null, false)} />
+        <ChatItemDropList room={room} onClose={changeOpen.bind(null, false)} />
 
       </Suspense>
   

@@ -11,9 +11,11 @@ const VideoCallPlacehosder: React.FC<{userId: string, big: boolean}> = ({userId,
   const [user] = useDocumentData(doc(firestore, 'users', userId))
 
   return (
-    <div className='flex items-center justify-center w-screen flex-col gap-2'>
+    <div className={'flex items-center bg-gray-900 drop-shadow-lg rounded-[20px] justify-center h-full z-10 flex-col gap-2 ' + (big && 'w-screen absolute bg-black ')}
+      style={{backgroundColor: big ? '#181818' : "rgb(17, 24, 39)" }}
+    >
 
-    <div className={' relative overflow-hidden ' + (big ? 'avatar_xl' : 'avatar_md')} >
+    <div className={' relative overflow-hidden ' + (big ? 'avatar_xl' : 'avatar_lg')} >
 
       {user && 
        <Image 
@@ -24,7 +26,7 @@ const VideoCallPlacehosder: React.FC<{userId: string, big: boolean}> = ({userId,
 
     </div>
 
-    <h1 className={' text-white font-semibold ' + (big ? 'text-3xl' : "text-lg")}>
+    <h1 className={' text-white font-semibold ' + (big ? 'text-3xl' : "text-xl")}>
       {user?.displayName}
     </h1>
     </div>

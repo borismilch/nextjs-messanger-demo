@@ -15,6 +15,7 @@ interface rtcRes { type: string, sdp: string }
 export interface IVideoEndedCall extends IMessage {
   body: {
     timestamp: { seconds: number },
-    callLength: number
+    callLength: number,
+    rejected: boolean
   }
 }

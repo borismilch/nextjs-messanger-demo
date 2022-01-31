@@ -21,13 +21,6 @@ const Help = () => {
         isHelp
         user={{...user?.data(), uid:user?.id} as IUser}
       />
-
-      <HelpMenu >
-
-      </HelpMenu>
-
-      <HelpMenu />
-
     </div>
   )
 };

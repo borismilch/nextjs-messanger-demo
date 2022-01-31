@@ -1,3 +1,6 @@
 export { default as VideoCallButton } from './VideoCallButton' 
 export { default as VideoCallPlaceholder } from './VideoCallPlacehosder'
 export { default as VideoCallActions } from './VideoCallActions'
+export { default as VideoCallAddition } from './CallAddition'
+export { default as VideoCallRequest } from './CallRequest'
+export { default as VideoSidebar } from './VideoSidebar'

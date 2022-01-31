@@ -7,13 +7,14 @@ import { firestore, auth } from '@/lib/firebase'
 import { doc, deleteDoc, addDoc, collection } from 'firebase/firestore'
 
 import { observer } from 'mobx-react-lite'
-import { ChatStore, ChangeMessageStore } from '@/store/.'
+import { ChatStore, ChangeMessageStore, RespondMessageStore, ResendMessageStore } from '@/store/.'
 import { EmojiPicker } from '@/components/forms/emoji';
 import { useToggle } from '@/hooks/.'
 
+import { FaComments } from 'react-icons/fa'
+
 import { useAuthState } from 'react-firebase-hooks/auth'
 import IReaction from '@/models/chat/IReaction';
-
 
 const MessageActions:React.FC<{isUser: boolean, message: IMessage, reactions: IReaction[]}> = ({isUser, message, reactions}) => {
 
@@ -33,13 +34,18 @@ const MessageActions:React.FC<{isUser: boolean, message: IMessage, reactions: IR
     ChangeMessageStore.setMessage(message as ITextMessage)
   }
 
+  const selectMessage = () => {
+    RespondMessageStore.setMessage(message as ITextMessage)
+  }
+
+  const resendMessage = () => {
+    ResendMessageStore.setMessage(message as ITextMessage)
+  }
   const addReaction = async (react: string) => {
     const reaction = {
       body: react,
       userId: user.uid,
     }
-
-    console.log(reactions)
 
     const exsistReaction = reactions?.find(item => item.body === react && item.userId === user.uid)
 
@@ -71,6 +77,13 @@ const MessageActions:React.FC<{isUser: boolean, message: IMessage, reactions: IR
       <AppIcon
         Icon={<RiShareForwardFill className=' text-gray-600' />}
         classes='p-1  bg-white'
+        onclick={resendMessage.bind(null)}
+      />
+
+      <AppIcon
+        Icon={<FaComments className=' text-gray-600' />}
+        classes='p-1  bg-white'
+        onclick={selectMessage.bind(null)}
       />
 
      <div className='relative'>

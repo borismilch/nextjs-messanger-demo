@@ -14,10 +14,10 @@ import { ChatStore } from '@/store/.'
 
 import { emojies } from '@/utils/mock/emojies';
 
-import { TextMessageContent, ImageMessageContent, EmojiMessage, MessageActions, VoiceMessageContent , CallRequstMessageContent, CallEndMessageContent} from '..'
+import { TextMessageContent, ImageMessageContent, EmojiMessage, MessageActions, VoiceMessageContent, CallEndMessageContent} from '..'
 import IReaction from '@/models/chat/IReaction';
 
-import { Reactions } from '..'
+import { Reactions, MessageRespond } from '..'
 import { VideoMessage } from '../content';
 
 import { DocuementMessageContent } from '../content'
@@ -28,18 +28,16 @@ const Message: React.FC<{message: ITextMessage | any}> = ({message}) => {
 
   const isUser = user.uid === message.userId
   const [reactions] = useCollection(collection(firestore, 'rooms', ChatStore.selectedChatId, 'messages', message.id, 'reactions'))
-
   const isEmoji = emojies.includes(message.body)
   const isImage = message.role === 'image'
   const isVideo = message.role === 'video'
   const isDocument = message.role === "document"
   const isVoice = message.role === 'voice'
-  const isCallRequest = message.role === 'call-request'
   const isCallEnd = message.role === 'call-ended'
   
   return (
-    <div className='flex group items-center group gap-3 p-2 relative '>
 
+    <div className='flex group items-center group gap-3 p-2 relative '>
       {
        isUser && (
         <>
@@ -56,7 +54,7 @@ const Message: React.FC<{message: ITextMessage | any}> = ({message}) => {
         </>
        )
       }
-
+  
       <div className='flex items-start gap-3'>
 
         { !isUser && <div className='avatar_sm'>
@@ -70,6 +68,8 @@ const Message: React.FC<{message: ITextMessage | any}> = ({message}) => {
 
           <div className='flex flex-col items-end '>
 
+          {message.respond && <MessageRespond messageId={message.respond} />}
+
            { isEmoji ?  
             <EmojiMessage message={message} /> : 
 
@@ -78,8 +78,6 @@ const Message: React.FC<{message: ITextMessage | any}> = ({message}) => {
             isVideo ? <VideoMessage message={message} /> :
 
             isDocument ? <DocuementMessageContent message={message} /> :
-
-            isCallRequest ? <CallRequstMessageContent message={message} /> :
 
             isCallEnd ? <CallEndMessageContent message={message} /> :
 
@@ -93,7 +91,7 @@ const Message: React.FC<{message: ITextMessage | any}> = ({message}) => {
 
          </div>
 
-        </div>
+      </div>
 
       {
         !isUser && (
